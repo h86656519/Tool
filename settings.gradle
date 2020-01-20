@@ -1,2 +1,2 @@
-include ':extend_1'
+include ':extend_1', ':dialog'
 rootProject.name='Tool'
