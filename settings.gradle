@@ -1,2 +1,2 @@
-include ':extend_1', ':dialog'
+include ':extend_1', ':dialog', ':rxjava'
 rootProject.name='Tool'
