@@ -1,4 +1,4 @@
-package com.example.animation_fadeinout;
+package com.example.test;
 
 import org.junit.Test;
 
@@ -13,16 +13,5 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
-    }
-
-    @Test
-    public void test() {
-        String name = null;
-        String name2 = null;
-
-        for (int i = 0; i < 5; i++) {
-            name = name + i;
-        }
-        System.out.println(name);
     }
 }

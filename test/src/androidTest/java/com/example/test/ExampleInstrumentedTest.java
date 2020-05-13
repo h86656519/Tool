@@ -1,4 +1,4 @@
-package com.example.dependencyinjection;
+package com.example.test;
 
 import android.content.Context;
 
@@ -22,14 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.example.dependencyinjection", appContext.getPackageName());
-    }
-
-    @Test
-    public void test(){
-        int count = 3;
-        for (int i = count; i == 0; i--) {
-            System.out.println(i);
-        }
+        assertEquals("com.example.test", appContext.getPackageName());
     }
 }

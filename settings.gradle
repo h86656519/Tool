@@ -1,2 +1,2 @@
-include ':extend_1', ':dialog', ':rxjava'
+include ':extend_1', ':dialog', ':rxjava', ':dependencyinjection', ':animation', ':test', ':threaffragment'
 rootProject.name='Tool'
