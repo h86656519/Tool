@@ -14,12 +14,15 @@ import org.junit.Test;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
@@ -226,7 +229,6 @@ public class ExampleUnitTest {
     }
 
     public class Post {
-
         public String box_id = ""; // idx = 0 //格口編號
         public String express_id = ""; // idx = 1 //運單號
         public String phone_number = ""; // idx = 2 //客戶手機號碼
@@ -1067,7 +1069,7 @@ public class ExampleUnitTest {
 //        };
 //        runnable.run();
 
-        Runnable runnable = () -> System.out.println("Lambda 寫法，好處: 1.比較短 2.可以取代 Functional Interface 3.可以避免產生出新的class 4.但只能用在只有一個method 的 interface，多個method 的interface 就不能用lambda");
+        Runnable runnable = () -> System.out.println("Lambda 寫法，好處: 1.比較短 2.可以取代 Functional Interface 3.可以避免產生出新的class 4.但只.能.用.在Functional Interface(只有一個method 的 interface ex:Runnable)");
         runnable.run();
 
         //放在collecttion 時
@@ -1082,8 +1084,18 @@ public class ExampleUnitTest {
 //            System.out.println(s + ": " + map.get(s));
 //        }
 
+        ArrayList<String> list = new ArrayList<>();
         //Lambda寫法
-        set.forEach(s -> System.out.println(s + ": " + map.get(s)));
+        set.forEach(s -> System.out.println(s + ": " + map.get(s))); // lambda
+        System.out.println("--------------------");
+        set.forEach(System.out::print); //method reference 不一定要用這種寫法，用lambda即可
+        System.out.println("--------------------");
+        set.forEach(s -> { //要做二件是以上就用{}包
+            System.out.println(s + ": " + map.get(s));
+            list.add(map.get(s));
+        });
+        System.out.println("將map 裝入list" + list);
+
     }
 
     //多個method 的interface 就不能用lambda
@@ -1091,6 +1103,13 @@ public class ExampleUnitTest {
         void fun1();
 
         void fun2(); //mark 掉就可以用
+
+        default void fun3(){
+            System.out.println("加入defult 就可有body，且也不一定要被時做出來");
+        };
+        default void fun4(){
+            System.out.println("而且可以加入多個");
+        };
     }
 
     public void test11() {
@@ -1177,5 +1196,92 @@ public class ExampleUnitTest {
         }
     }
 
+    @Test
+    public void test12() {
+        int a = 1;
+        int b = 0;
+        if (a == 0) {
+            System.out.println("1");
+        } else if (b == 0) {
+            System.out.println('2');
+        }
+    }
 
+    /**
+     * 找出二個list之間不同的名稱
+     * 傳統寫法
+     */
+    @Test
+    public void findDifferent() {
+        List<String> list1 = new ArrayList<String>();
+        list1.add("apple");
+        list1.add("orange");
+        list1.add("banana");
+        list1.add("strawberry");
+
+        List<String> list2 = new ArrayList<String>();
+        list2.add("apple");
+        list2.add("orange");
+
+        System.out.println(list1);
+        System.out.println(list2);
+
+        for (String A : list2) {
+            if (list1.contains(A))
+                list1.remove(A);
+        }
+        System.out.println("過濾後" + list1); //這個做法是預設 list1.size() > list2.size()
+
+//        for (String A : list1) {
+//            if (list2.contains(A))
+//                list2.remove(A);
+//        }
+//        System.out.println("過濾後" + list2); //若 list1.size() < list2.size() 就無意義了
+
+    }
+
+    /**
+     * java 8 寫法
+     * 參考 https://matthung0807.blogspot.com/2018/10/java-8-streamcollect.html
+     */
+    @Test
+    public void findDifferent2() {
+        List<String> a1 = Arrays.asList("2", "3", "4");
+        List<String> a2 = Arrays.asList("1", "2", "3", "4", "5", "6", "7");
+
+        List<String> result = a2.stream().
+                filter(elem -> !a1.contains(elem)). //篩選條件放這
+                collect(Collectors.toList()); //不保證返回的類型
+//        collect(Collectors.toCollection(ArrayList::new)); //保證返回的會是一個新的ArrayList
+        result.forEach(e -> System.out.print(e));
+
+        a2.stream().
+                filter(elem -> !a1.contains(elem)).
+                collect(Collectors.toList())
+                .forEach(System.out::println); //也可以直接就印出了，不用像上面要先接出再印出
+    }
+
+    @Test
+    public void findDifferent3() {
+        Post post1 = new Post();
+        post1.setBox_id("1");
+        Post post2 = new Post();
+        post2.setBox_id("2");
+        Post post3 = new Post();
+        post3.setBox_id("3");
+        Post post4 = new Post();
+        post4.setBox_id("4");
+
+        List<Post> first = Arrays.asList(post1, post2, post3, post4);
+        List<Post> second = Arrays.asList(post1, post2, post4);
+        List<Post> result = difference(first, second);
+        System.out.println(result.get(0).getBox_id());
+
+    }
+
+    public <T> List<T> difference(List<T> first, List<T> second) {
+        List<T> toReturn = new ArrayList<>(first);
+        toReturn.removeAll(second);
+        return toReturn;
+    }
 }
