@@ -36,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("有沒有相等:" + student1.equals(student3));
 
         /**
+        * RequiredArgsConstructor 效果
+         * **/
+//        Student s = new Student("123");
+
+        /**
          * 可以自動呼叫close()
          * */
         String data = "123";
