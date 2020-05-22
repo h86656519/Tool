@@ -1,2 +1,5 @@
 include ':extend_1', ':dialog', ':rxjava', ':dependencyinjection', ':animation', ':test', ':threaffragment'
 rootProject.name='Tool'
+include ':setcolor'
+include ':sharedpreferences'
+include ':lombok'
