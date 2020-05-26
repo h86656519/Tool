@@ -12,6 +12,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/animation" />
+            <option value="$PROJECT_DIR$/changesystemtime" />
             <option value="$PROJECT_DIR$/dependencyinjection" />
             <option value="$PROJECT_DIR$/dialog" />
             <option value="$PROJECT_DIR$/extend_1" />

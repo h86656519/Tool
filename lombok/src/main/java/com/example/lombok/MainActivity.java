@@ -48,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
         /**
          * 生成Builder 模式
-         * */
-        Student s = new Student.StudentBuilder()
-                .id("A123...")
-                .phone("0921....")
-                .sex("MAN")
-                .build();
-        System.out.println(s);
+//         * */
+//        Student s = new Student.StudentBuilder()
+//                .id("A123...")
+//                .phone("0921....")
+//                .sex("MAN")
+//                .build();
+//        System.out.println(s);
     }
 }
