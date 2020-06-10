@@ -1104,12 +1104,17 @@ public class ExampleUnitTest {
 
         void fun2(); //mark 掉就可以用
 
-        default void fun3(){
+        default void fun3() {
             System.out.println("加入defult 就可有body，且也不一定要被時做出來");
-        };
-        default void fun4(){
+        }
+
+        ;
+
+        default void fun4() {
             System.out.println("而且可以加入多個");
-        };
+        }
+
+        ;
     }
 
     public void test11() {
@@ -1283,5 +1288,33 @@ public class ExampleUnitTest {
         List<T> toReturn = new ArrayList<>(first);
         toReturn.removeAll(second);
         return toReturn;
+    }
+
+
+    @Test
+    public void main() {
+        boolean result = contains(0, 1);
+        //    System.out.println(result);
+        float a = 1.1f;
+        for (float i = 0f; i < 10f; i = i + a) {
+            System.out.println(i);
+        }
+    }
+
+    int left = 0;
+    int right = 2;
+    int top = 0;
+    int bottom = 2;
+
+    //判斷點在不在這面積裡面
+    public boolean contains(int x, int y) {
+        return left < right && top < bottom //先確認是不是一個面積
+                && x >= left && x < right && y >= top && y < bottom;
+    }
+
+    void throwsException() throws Exception { //在method 裡宣告就就不用包try/catch
+
+
+        throw new Exception();
     }
 }

@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
      * 修改系統時間
      * 1.在Manifeest 加  android:sharedUserId="android.uid.system"
      * 2.製作一個包了pem和pk8的簽名擋
-     * 3.鑰產出到apk才會包入 = 不能直接部，要用apk裝入
+     * 3.要產出到apk才會包入 = 不能直接部，要用apk裝入
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
