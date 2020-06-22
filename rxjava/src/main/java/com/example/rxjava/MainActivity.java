@@ -68,14 +68,27 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-//                emitter.onNext(i);
-                //  emitter.onComplete();
+            }
+        }).subscribeOn(Schedulers.io()); //subscribeOn 負責控制 onNext 的 Thread該在哪邊執行，所以將2個任務都交由同一個來執行 = 一起同步執行
+
+        Observable<Integer> observableTask2 = Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                for (int i = 1; i <= 15; i++) {
+                    try {
+                        Thread.sleep(1000);
+                        if (i == 15) {
+                            emitter.onNext(15);
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }).subscribeOn(Schedulers.io());
 
-
         observableTask1.subscribe(observer);
-
+        observableTask2.subscribe(observer);
     }
 
     // 创建观察者
@@ -91,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
         public void onNext(Object value) {
             //   Log.i("ClickActivity", "點太快");
 
-//            Log.d(TAG, "对Next事件" + value + "作出响应");
             if (value.toString().equals("5")) {
                 Log.d(TAG, "5秒到了");
             }
@@ -99,7 +111,9 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "10秒到了");
             }
 
-
+            if (value.toString().equals("15")) {
+                Log.d(TAG, "15秒到了");
+            }
             // mDisposable.dispose(); //切斷观察者和被观察者的连接
         }
 
