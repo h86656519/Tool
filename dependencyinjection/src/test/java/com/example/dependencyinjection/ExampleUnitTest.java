@@ -13,15 +13,21 @@ import androidx.annotation.Nullable;
 import org.junit.Test;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
@@ -1317,4 +1323,83 @@ public class ExampleUnitTest {
 
         throw new Exception();
     }
+
+    @Test
+    public void time() throws ParseException {
+//        SimpleDateFormat format = new SimpleDateFormat("hh:mm a");
+//        String dateStr = "12:30pm";
+//        Date d1 = format.parse(dateStr);
+//        System.out.println(d1);
+        System.out.println(getDeltaTimeMins("01:30am", "02:00am"));
+
+    }
+
+    public Long getDeltaTimeMins(String startDate, String endDate) {
+        java.text.SimpleDateFormat timeFmt = new SimpleDateFormat("hh:mm", Locale.getDefault());
+        timeFmt.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+        DateFormat df = timeFmt;
+        try {
+            Date d1 = df.parse(startDate);
+            Date d2 = df.parse(endDate);
+            long diff = d2.getTime() - d1.getTime();
+            Long mins = (diff / (1000 * 60));
+            return mins;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1L;
+    }
+
+    @Test
+    public void mytest2() {
+        String str = "a b c d-e-f%g";
+//        String str =  "cats AND*Dogs-are Awesome";
+//        str.trim();
+//        str.replaceAll("[-+.^:,%]","");
+//
+//        System.out.println(str);
+        String regExp = "[\n`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。， 、？ -]";
+        str = str.replaceAll(regExp, "");
+        str.toUpperCase();
+        System.out.println("去除特殊字符后的值：" + str);
+    }
+
+    @Test
+    public void mytest3() {
+        String str = "aaa*bbbb";
+        String str1 = str.substring(0, str.indexOf("*"));
+        String str2 = str.substring(str.indexOf("*") + 1, str.length());
+        System.out.println(str1);
+        System.out.println(str2);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < str2.length(); i++) {
+            stringBuilder.append(str1.substring(i, i + 1));
+            stringBuilder.append(str2.substring(i, i + 1));
+        }
+        System.out.println(stringBuilder);
+    }
+
+    @Test
+    public void calltwoSum() {
+        int[] result = twoSum(new int[]{2, 7, 9, 11, 15}, 9);
+        for (int i : result) {
+            System.out.println(i);
+        }
+
+    }
+
+    public int[] twoSum(int[] nums, int target) {
+//        int resultArray[] = new int[2];
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 1; j < nums.length; j++) {
+                if (nums[i] + nums[j] == target) {
+//                    resultArray[i] = i;
+//                    resultArray[i+1] = j;
+                    return new int[]{i, j};
+                }
+            }
+        }
+        throw new IllegalArgumentException("No two sum solution");
+    }
+
 }

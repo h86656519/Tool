@@ -1,11 +1,11 @@
-package com.example.kotlin
+package com.example.time_test
 
-import org.junit.Assert.assertEquals
 import org.junit.Test
+
+import org.junit.Assert.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.*
@@ -471,18 +471,32 @@ class ExampleUnitTest {
     @Test
     fun myTest() {
 //        var str: String = "12:30pm-12:00am"
-        var str: String = "01:23am-01:08am"
 //        println("小時"+str.substring(0, 2))
 //        println("分鐘"+ str.substring(3, 5))
 //        println("單位"+str.substring(5, 7))
 //        println("小時"+str.substring(8, 10))
 //        println("分鐘"+str.substring(11, 13))
 //        println("單位"+str.substring(13, 15))
-        var result = StringChallenge(str)
-        print(result)
+
+//        /**test1: 輸入ex:01:23am-01:08am，請回傳分為單位的數*/
+//        var str: String = "01:23am-01:08am"
+//        var result = test1(str)
+//        print(result)
+//
+//        /**test2:將一組自串裡非字母的符號都移除，並回傳大寫的字母*/
+////        var test2str: String = "a b c d-e-f%g"
+//        var test2str: String = "cats AND*Dogs-are Awesome"
+//        var test2Result = test2(test2str)
+//        println(test2Result)
+
+        /**test3:將一組自串以*號分割，並交叉重組成新的字串*/
+        var test3Str = "aaa*bbb"
+        var result3 = test3(test3Str)
+//        var result = test3withstringBuilder(test3Str)
+        println("test3結果:" + result3)
     }
 
-    fun StringChallenge(str: String): String {
+    fun test1(str: String): String {
         var firstTimeType: String = str.substring(5, 7)
         var secondTimeType: String = str.substring(13, 15)
         var firstTime: String = str.substring(0, 7)
@@ -495,7 +509,7 @@ class ExampleUnitTest {
             return (1440 + result).toString()
         }
     }
-//
+
 //    @Test
 //    fun StringChallenge() {
 //        var dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
@@ -524,24 +538,10 @@ class ExampleUnitTest {
     }
 
     fun test2(str: String): String {
-//       var str:String =  "a b c d-e-f%g"
-//        var str: String = "cats AND*Dogs-are Awesome"
         val regExp = "[\n`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。， 、？ -]"
         var result = str.replace(regExp.toRegex(), "")
         result.toUpperCase()
         return result
-    }
-
-    @Test
-    fun calltest3() {
-        var test2str: String = "cats AND*Dogs-are Awesome"
-        var test2Result = test2(test2str)
-        println(test2Result)
-
-        var str = "aaa*bbb"
-//        var result = test3(str)
-//        var result = StringChallenge3(str)
-//        println(result)
     }
 
 
@@ -549,21 +549,19 @@ class ExampleUnitTest {
         val str1 = str.substring(0, str.indexOf("*"))
         val str2 = str.substring(str.indexOf("*") + 1, str.length)
         var result: String = ""
-        val stringBuilder = StringBuilder()
-
         for (i in 0 until str2.length) {
-//            stringBuilder.append(str1.substring(i, i + 1))
-//            stringBuilder.append(str2.substring(i, i + 1))
             var s1 = str1.substring(i, i + 1)
             var s2 = str2.substring(i, i + 1)
-            result.plus(s1)
-            result.plus(s2)
+            result = result.plus(s1)
+            result = result.plus(s2)
+//            result = result + s1 這樣寫也行啦
+//            result = result + s2
         }
 
         return result
     }
 
-    fun StringChallenge3(str: String): String {
+    fun test3withstringBuilder(str: String): String {
         val str1 = str.substring(0, str.indexOf("*"))
         val str2 = str.substring(str.indexOf("*") + 1, str.length)
         val stringBuilder = StringBuilder()
@@ -574,6 +572,8 @@ class ExampleUnitTest {
         return stringBuilder.toString();
     }
 
+
+    /**kotlin時間轉換練習*/
     @Test
     fun timeTest() {
         var dateTime = LocalDate.parse("01:23 am", DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT))
@@ -585,5 +585,4 @@ class ExampleUnitTest {
 //        var parsedDate = LocalDate.parse("01:23 am", DateTimeFormatter.ofPattern("HH:mm a"))
 //        println("14/02/2018 : " + parsedDate)
     }
-
 }
