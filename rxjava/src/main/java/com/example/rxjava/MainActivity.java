@@ -23,6 +23,7 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * 1.利用Rxjava 來擋住過快的二次連點，防手抖
  * 2.建立一個非同步事件(ex:呼api，撈db 等等...)
+ * 3.建立多個任務同時執行，優化寫法
  */
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -40,10 +41,34 @@ public class MainActivity extends AppCompatActivity {
 //        RxView.clicks(btnOk).throttleFirst(1, TimeUnit.SECONDS).subscribe(click -> {
 //            Log.i("ClickActivity", "點太快");
 //        });
+        Observable<Integer> observableTask1 = task1();
+        Observable<Integer> observableTask2 = task2();
 
+        observableTask1.subscribe(observer);
+        observableTask2.subscribe(observer);
+    }
 
+    private Observable<Integer> task2() {
+        return Observable.create(new ObservableOnSubscribe<Integer>() {
+                @Override
+                public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                    for (int i = 1; i <= 15; i++) {
+                        try {
+                            Thread.sleep(1000);
+                            if (i == 15) {
+                                emitter.onNext(15);
+                            }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }).subscribeOn(Schedulers.io());
+    }
+
+    private Observable<Integer> task1() {
         //  1. 創建被觀察者 Observable
-        Observable<Integer> observableTask1 = Observable.create(new ObservableOnSubscribe<Integer>() {
+        return Observable.create(new ObservableOnSubscribe<Integer>() {
         // 2. 在subscribe（）裡定義需要被發送的事件，時間到了，api回來了....
             @Override
             public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
@@ -69,26 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-        }).subscribeOn(Schedulers.io()); //subscribeOn 負責控制 onNext 的 Thread該在哪邊執行，所以將2個任務都交由同一個來執行 = 一起同步執行
-
-        Observable<Integer> observableTask2 = Observable.create(new ObservableOnSubscribe<Integer>() {
-            @Override
-            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
-                for (int i = 1; i <= 15; i++) {
-                    try {
-                        Thread.sleep(1000);
-                        if (i == 15) {
-                            emitter.onNext(15);
-                        }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
         }).subscribeOn(Schedulers.io());
-
-        observableTask1.subscribe(observer);
-        observableTask2.subscribe(observer);
     }
 
     // 创建观察者
