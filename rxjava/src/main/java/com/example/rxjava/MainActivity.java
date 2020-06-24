@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     }
-                }).subscribeOn(Schedulers.io());
+                    }).subscribeOn(Schedulers.io()); //subscribeOn() 控制 onNext 的 Thread
 
     }
 
