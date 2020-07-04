@@ -59,7 +59,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
                         .putString("USER", ed_input.getText().toString())
                         .commit();
 //                      .apply();
-//                jumpFragment(new MainFragment2());
+                jumpFragment(new MainFragment2());
                 String input = ed_input.getText().toString();
                 if (input.equals("123")){
                     ed_input.setPaintFlags(ed_input.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG); //新增文字刪除線
