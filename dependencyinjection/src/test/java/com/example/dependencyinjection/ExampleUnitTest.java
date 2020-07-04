@@ -1,14 +1,8 @@
 package com.example.dependencyinjection;
 
-import android.icu.text.Edits;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
-import android.util.Log;
 import android.widget.Button;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import org.junit.Test;
 
@@ -18,10 +12,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -30,7 +22,7 @@ import java.util.Set;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -82,7 +74,6 @@ public class ExampleUnitTest {
         }
 
     }
-
 
     public void test3() {
         List<Bean> list = new ArrayList<Bean>();
@@ -1154,7 +1145,6 @@ public class ExampleUnitTest {
         }
     }
 
-
     @Test
     public void test10() {
         boolean aaa = false;
@@ -1296,7 +1286,6 @@ public class ExampleUnitTest {
         return toReturn;
     }
 
-
     @Test
     public void main() {
         boolean result = contains(0, 1);
@@ -1402,4 +1391,16 @@ public class ExampleUnitTest {
         throw new IllegalArgumentException("No two sum solution");
     }
 
+    //建立customer
+    @Test
+    public void BuilderTest() {
+        Customer customer1 = Customer.getBuilder("cust1", "1").build();
+        Customer customer2 = Customer.getBuilder("abc", "2").setAge("18").build();
+
+        Customer.MyBuilder builder = new Customer.MyBuilder("123", "12");
+        builder.setAddress("123");
+        builder.setAge("20");
+        Customer customer3 = new Customer(builder.setAddress("123"));
+        System.out.println(customer3);
+    }
 }
