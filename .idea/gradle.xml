@@ -12,6 +12,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/animation" />
+            <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/changesystemtime" />
             <option value="$PROJECT_DIR$/contentprovider" />
             <option value="$PROJECT_DIR$/dependencyinjection" />
@@ -20,6 +21,7 @@
             <option value="$PROJECT_DIR$/getcontentprovider" />
             <option value="$PROJECT_DIR$/intentservice" />
             <option value="$PROJECT_DIR$/lombok" />
+            <option value="$PROJECT_DIR$/observerpattern" />
             <option value="$PROJECT_DIR$/rxjava" />
             <option value="$PROJECT_DIR$/setcolor" />
             <option value="$PROJECT_DIR$/sharedpreferences" />
