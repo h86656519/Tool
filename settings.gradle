@@ -1,3 +1,4 @@
+include ':popupwindow'
 include ':observerpattern'
 include ':app'
 include ':intentservice'

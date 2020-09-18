@@ -22,6 +22,7 @@
             <option value="$PROJECT_DIR$/intentservice" />
             <option value="$PROJECT_DIR$/lombok" />
             <option value="$PROJECT_DIR$/observerpattern" />
+            <option value="$PROJECT_DIR$/popupwindow" />
             <option value="$PROJECT_DIR$/rxjava" />
             <option value="$PROJECT_DIR$/setcolor" />
             <option value="$PROJECT_DIR$/sharedpreferences" />
