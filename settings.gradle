@@ -1,3 +1,4 @@
+include ':gesture'
 include ':popupwindow'
 include ':observerpattern'
 include ':app'

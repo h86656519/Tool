@@ -54,13 +54,14 @@ public class MainActivity extends AppCompatActivity {
         // 按下android回退物理鍵 PopipWindow消失解決
 
 //        showAtLocation 是相對於整個佈局
-//        showAsDropDown 是相對於某個元件
+//        showAsDropDown 是相對於某個元件(的下方)
 
         //底部  第一個參數是parentView，xy 是偏移
 //        popupWindow.showAtLocation(button, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
         //頂部
-        popupWindow.showAtLocation(view, Gravity.NO_GRAVITY, 100, 0); //上面設 match_parent 偏移等於無用
-//        popupWindow.showAsDropDown(button,  100, 0);
+        popupWindow.showAtLocation(view, Gravity.NO_GRAVITY, 0, 0); //上面設 match_parent 偏移等於無用
+//        popupWindow.showAsDropDown(button,  100,0, Gravity.TOP);
 
     }
 }
+
