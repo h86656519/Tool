@@ -18,12 +18,11 @@
             <option value="$PROJECT_DIR$/dependencyinjection" />
             <option value="$PROJECT_DIR$/dialog" />
             <option value="$PROJECT_DIR$/extend_1" />
-            <option value="$PROJECT_DIR$/gesture" />
+            <option value="$PROJECT_DIR$/fragment" />
             <option value="$PROJECT_DIR$/getcontentprovider" />
             <option value="$PROJECT_DIR$/intentservice" />
             <option value="$PROJECT_DIR$/lombok" />
             <option value="$PROJECT_DIR$/observerpattern" />
-            <option value="$PROJECT_DIR$/popupwindow" />
             <option value="$PROJECT_DIR$/rxjava" />
             <option value="$PROJECT_DIR$/setcolor" />
             <option value="$PROJECT_DIR$/sharedpreferences" />
@@ -34,6 +33,7 @@
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
+        <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
     </option>
   </component>

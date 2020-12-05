@@ -1,5 +1,4 @@
-include ':gesture'
-include ':popupwindow'
+include ':fragment'
 include ':observerpattern'
 include ':app'
 include ':intentservice'
